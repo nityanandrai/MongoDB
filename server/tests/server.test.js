@@ -62,7 +62,7 @@ describe('GET /todos', () => {
 describe('GET /todo/:id', () => {
   it('Should return todo', (done) => {
       request(app)
-        .get('/todos/' + todos[0]._id.toHexString())
+        .get('/todos/ ' + todos[0]._id.toHexString())
         .expect(200)
         .expect((res) => {
           expect(res.body.todo.text).toBe(todos[0].text);

@@ -1,5 +1,7 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
+const _ = require('lodash');
+
 
 var {ObjectID} = require('mongodb');
 var {mongoose} = require('./db/mongoose.js');
@@ -8,6 +10,7 @@ var {User} = require('./models/user.js');
 
 
 var app = express();
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -24,6 +27,23 @@ app.post('/todos', (req, res) => {
     // console.log(e);
     res.status(400).send(e);
   });
+});
+
+app.post('/users', (req, res) => {
+
+  var body = _.pick(req.body, ['email', 'password']);
+
+  var user = new User(body);
+
+  user.save().then(() => {
+    return user.generateAuthToken();
+    // res.send(doc);
+  }).then((token) => {
+    res.header('x-auth', token).send(user);
+  }).catch((err) => {
+    res.status(400).send(err);
+  });
+
 });
 
 
@@ -50,8 +70,8 @@ app.get('/todos/:id', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('Server up and running at 3000');
+app.listen(port, () => {
+  console.log('Server up and running at ' + port);
 });
 
 module.exports = {
