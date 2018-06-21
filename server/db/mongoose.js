@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const db = require('./database.js');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongoDB://localhost:27017/TodoApp');
-
+mongoose.connect(db.mongoURI);
 
 module.exports = {
   mongoose: mongoose
