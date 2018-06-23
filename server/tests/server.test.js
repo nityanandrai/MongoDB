@@ -111,7 +111,7 @@ describe('DELETE /todo/:id', () => {
     request(app)
       .delete('/todos/' + hexId)
       .expect(404)
-      .end(done);
+      .end(done); 
   });
 
 });
