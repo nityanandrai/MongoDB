@@ -4,7 +4,7 @@ const db = require('./database.js');
 mongoose.Promise = global.Promise;
 
 mongoose.connect(db.mongoURI).then(() => {
-  console.log('Successful connected to mLab');
+
 }).catch((err) => {
   console.log(err);
 });
