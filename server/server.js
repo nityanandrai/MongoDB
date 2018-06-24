@@ -39,7 +39,7 @@ app.post('/users', (req, res) => {
 
   user.save().then(() => {
     return user.generateAuthToken();
-    // res.send(doc);
+
   }).then((token) => {
     res.header('x-auth', token).send(user);
   }).catch((err) => {
@@ -47,7 +47,6 @@ app.post('/users', (req, res) => {
   });
 
 });
-
 
 
 app.get('/user/me', authenticate, (req, res) => {
