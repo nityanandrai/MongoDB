@@ -35,7 +35,7 @@ const populateTodos = (done) => {
   Todo.remove({}).then(() => {
     return Todo.insertMany(todos);
 
-  }).then(() => done());
+  }).then(() => done()).catch((e) => done(e));
 };
 
 const populateUsers = (done) => {
@@ -44,7 +44,7 @@ const populateUsers = (done) => {
     var userTwo = new User(users[1]).save();
 
     return Promise.all([userOne, userTwo])
-  }).then(() => done());
+  }).then(() => done()).catch((e) => done(e));
 };
 
 module.exports = {
