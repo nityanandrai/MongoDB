@@ -1,9 +1,11 @@
+require('./database.js');
+
 const mongoose = require('mongoose');
-const db = require('./database.js');
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.mongoURI).then(() => {
-
+console.log("Connected to mlab database", process.env)
 }).catch((err) => {
   console.log(err);
 });
