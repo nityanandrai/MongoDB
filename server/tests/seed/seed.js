@@ -19,16 +19,22 @@ const users = [{
   _id: userTwoId,
   email: 'nitya@iitg.ac.in',
   password: 'userTwoPass',
+  tokens: [{
+    access: 'auth',
+    token: jwt.sign({_id: userTwoId, access: 'auth'}, 'abc123').toString()
+  }]
 }];
 
 const todos  = [{
   _id: new ObjectID(),
-  text: "First text todo"
+  text: "First text todo",
+  _creator: userOneId
 }, {
   _id: new ObjectID(),
   text: "Second text todo",
   complete: true,
-  completed: 3342
+  completed: 3342,
+  _creator: userTwoId
 }];
 
 const populateTodos = (done) => {
